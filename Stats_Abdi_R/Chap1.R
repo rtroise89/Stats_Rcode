@@ -8,7 +8,7 @@ Std_Dev = apply(data, MARGIN=2, sd)
 
 # We now plot the points and SAVE it as a PDF
 # Make sure to add the PATH to the location where the plot is to be saved
-pdf('C:/Users/RichardT/Documents/Statistics/Stats_Rcode/Stats_Abdi_R.pdf')
+pdf('C:/Users/RichardT/Documents/Statistics/Stats_Rcode/Chap1_output.pdf')
 plot(Length,Meanings,main="Plot of Length vs Meanings")
 dev.off()
 
