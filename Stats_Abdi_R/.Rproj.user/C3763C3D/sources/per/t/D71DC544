@@ -7,7 +7,7 @@
     "folds" : "",
     "hash" : "1716886899",
     "id" : "D71DC544",
-    "lastKnownWriteTime" : 1578630092,
+    "lastKnownWriteTime" : 1579222640,
     "last_content_update" : -2147483648,
     "path" : "~/Statistics/Stats_Rcode/Stats_Abdi_R/Chap5_3.R",
     "project_path" : "Chap5_3.R",
@@ -17,7 +17,7 @@
         "tempName" : "Untitled1"
     },
     "relative_order" : 7,
-    "source_on_save" : true,
+    "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"
 }

@@ -13,11 +13,11 @@
     "project_path" : "Chap6.R",
     "properties" : {
         "cursorPosition" : "40,20",
-        "scrollLine" : "20",
+        "scrollLine" : "0",
         "tempName" : "Untitled1"
     },
     "relative_order" : 9,
-    "source_on_save" : true,
+    "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"
 }
