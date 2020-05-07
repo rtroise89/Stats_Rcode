@@ -1,0 +1,43 @@
+---
+title: "Chap1"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+library(dplyr)
+library(xtable)
+```
+
+First, set working directory. 'data' is a 2x20 table and should be numeric
+```{r, echo=FALSE}
+data <- read.csv("chap1.csv")
+data
+```
+
+Calculate the mean and standard deviation for all columns
+```{r, echo=FALSE}
+summarise_all(data, mean)
+summarise_all(data,sd)
+```
+
+We now perform a correlation and a test on the data which gives
+confidence intervals, regression analysis on the data, an ANOVA on the data
+```{r, echo=FALSE}
+Length = data$Length
+Meaning = data$Meanings
+cor1=cor.test(Length, Meaning,method = c("pearson"))
+reg1=lm(Length~Meaning)
+aov1=aov(Length~Meaning)
+```
+
+We now print the data and all the results
+```{r, echo=FALSE}
+print(cor1)
+knitr::kable(xtable(summary(reg1)))
+knitr::kable(xtable(summary(aov1)))
+```
+

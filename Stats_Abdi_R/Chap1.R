@@ -1,9 +1,11 @@
 # We first enter the data under two different variables names
+#read.csv
+# apply - loops (more difficult to explain)
 Length=c(3,6,2,6,2,9,6,5,9,4,7,11,5,4,3,9,10,5,4,10)
 Meanings=c(8,4,10,1,11,1,4,3,1,6,2,1,9,3,4,1,3,3,3,2)
 data=data.frame(Length,Meanings)
 
-Mean = colMeans(data)
+Mean = colMeans(data) #might not work for non-numeric, check for errors (manually?)
 Std_Dev = apply(data, MARGIN=2, sd)
 
 # We now plot the points and SAVE it as a PDF
