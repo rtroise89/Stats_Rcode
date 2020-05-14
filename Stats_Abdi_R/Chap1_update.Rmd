@@ -56,7 +56,12 @@ plot(data, main = "Length vs Meanings", xlab = "Length", ylab = "Meaning")
 ```
 
 ```{r, echo=FALSE}
-cor_table = data.frame(cor1$parameter, cor1$statistic, cor1$p.value, cor1$estimate, cor1$conf.int[1], cor1$conf.int[2])
+cor_table = data.frame(df = cor1$parameter, 
+                       t = cor1$statistic, 
+                       p = cor1$p.value, 
+                       r = cor1$estimate, 
+                       LowC.I. = cor1$conf.int[1], 
+                       UpperC.I = cor1$conf.int[2]) 
 #print(cor1)
 knitr::kable(xtable((cor_table)))
 ```
