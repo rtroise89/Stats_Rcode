@@ -1,5 +1,0 @@
-"0","Length = data$V1"
-"0","Meaning = data$V2"
-"0","cor1=cor.test(Length, Meaning,method = c(""pearson""))"
-"0","reg1=lm(Length~Meaning)"
-"0","aov1=aov(Length~Meaning)"

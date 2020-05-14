@@ -1,8 +1,0 @@
-"0","cor_table = data.frame(df = cor1$parameter, "
-"0","                       t = cor1$statistic, "
-"0","                       p = cor1$p.value, "
-"0","                       r = cor1$estimate, "
-"0","                       LowC.I. = cor1$conf.int[1], "
-"0","                       UpperC.I = cor1$conf.int[2]) "
-"0","#print(cor1)"
-"0","knitr::kable(xtable((cor_table)))"
