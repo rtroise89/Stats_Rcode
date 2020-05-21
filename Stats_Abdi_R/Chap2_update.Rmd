@@ -1,5 +1,5 @@
 ---
-title: "Chap1"
+title: "Chap2"
 authors: "Anjali Krishnan and Richard Troise"
 output: pdf_document
 ---
@@ -15,8 +15,8 @@ library(xtable)
 
 First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. User will also input desired variable names in double quotes
 ```{r, echo=FALSE}
-data <- read.csv("chap1.csv", header = FALSE, skip = 1)
-colnames(data) = c("Len", "Wid")
+data <- read.csv("chap2.csv", header = FALSE, skip = 1)
+colnames(data) = c("MemorySet", "ReactionTime")
 ```
 
 View the data.
@@ -34,7 +34,6 @@ Calculate the standard deviation for all columns
 summarise_all(data,sd)
 ```
 
-
 ```{r, echo=FALSE}
 column = colnames(data)
 colnames(data) <- c("V1", "V2")
@@ -42,39 +41,28 @@ var1 = data$V1
 var2 = data$V2
 ```
 
-We now perform a correlation and a test on the data which gives
-confidence intervals, regression analysis on the data, an ANOVA on the data
-```{r, echo=FALSE}
-cor1=cor.test(var1,var2, method = c("pearson"))
+Correlation between Memory Set and Reaction Time
+```{r}
+cor(var1,var2)
+```
+
+We now perform a regression analysis and an ANOVA on the data
+```{r}
 reg1=lm(var1~var2)
 aov1=aov(var1~var2)
 ```
 
 We now print the data and all the results
 ```{r, echo=FALSE, fig.align='left'}
-plot(data, main = "Length vs Meanings", xlab = column[1], ylab = column[2])
-```
-
-```{r, echo=FALSE}
-cor_table = data.frame(df = cor1$parameter, 
-                       t_value = cor1$statistic, 
-                       p_value = cor1$p.value, 
-                       r = cor1$estimate, 
-                       LowC.I. = cor1$conf.int[1], 
-                       UpperC.I = cor1$conf.int[2])
-
-rownames(cor_table) = ""
-
-knitr::kable(xtable(cor_table, digits = 1))
+plot(data, main = "Memory Set vs RT", xlab = column[1], ylab = column[2])
 ```
 
 Regression Analysis
 ```{r, echo=FALSE}
-knitr::kable(xtable(summary(reg1)))
+knitr::kable(xtable(reg1))
 ```
 
 ANOVA table
 ```{r, echo=FALSE}
-knitr::kable(xtable((summary(aov1))))
+knitr::kable(xtable(summary(aov1)))
 ```
-

@@ -1,0 +1,2 @@
+"0","reg1=lm(var1~var2)"
+"0","aov1=aov(var1~var2)"
