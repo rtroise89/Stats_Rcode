@@ -1,0 +1,45 @@
+---
+title: "Chap5"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+library(dplyr)
+library(xtable)
+```
+
+First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap5.csv", header = FALSE, skip = 1)
+colnames(data) <- c("Expt", "Control")
+```
+
+We now combine the observations into one long column (score)
+```{r}
+colnames(data) <- c("V1", "V2")
+score=c(data$V1,data$V2)
+```
+
+We generate a second column (group), that identifies the group for each score
+```{r}
+levels=factor(c(rep("Expt",5),rep("Control",5)))
+```
+
+We now form a data frame with the dependent variable and the factors, then print the table.
+```{r}
+data=data.frame(score=score,group=levels)
+knitr::kable(xtable(data))
+```
+
+We now generate the ANOVA table based on the linear model
+```{r}
+aov1=aov(score~levels)
+print(model.tables(aov(score~levels),type = "means"),digits=3)
+summary(aov1)
+```
+

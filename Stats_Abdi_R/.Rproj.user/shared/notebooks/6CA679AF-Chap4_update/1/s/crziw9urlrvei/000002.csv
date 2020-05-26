@@ -1,0 +1,5 @@
+"0","colnames(data) = c(""var1"", ""var2"", ""var3"")"
+"0","semi_r = spcor(data)"
+"0","barplot(semi_r$estimate, beside=TRUE, horiz=TRUE, "
+"0","        col=c(""red"",""black"",""blue""),"
+"0","        xlab=""Semi-Partial Person r"", xlim=c(-1,1))"

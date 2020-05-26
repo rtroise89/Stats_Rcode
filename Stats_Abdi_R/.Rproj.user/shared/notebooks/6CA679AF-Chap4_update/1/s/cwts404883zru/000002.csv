@@ -1,0 +1,6 @@
+"0","SS_residual=sum(Residual^2)"
+"0","print(SS_residual)"
+"1","[1]"
+"1"," 24.8334"
+"1","
+"

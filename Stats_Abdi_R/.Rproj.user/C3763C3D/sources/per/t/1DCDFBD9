@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1578598855299.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3644439530",
+    "id" : "1DCDFBD9",
+    "lastKnownWriteTime" : 1580009716,
+    "last_content_update" : -2147483648,
+    "path" : "~/Statistics/Stats_Rcode/Stats_Abdi_R/Chap5.R",
+    "project_path" : "Chap5.R",
+    "properties" : {
+        "cursorPosition" : "26,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : true,
+    "source_window" : "",
+    "type" : "r_source"
+}

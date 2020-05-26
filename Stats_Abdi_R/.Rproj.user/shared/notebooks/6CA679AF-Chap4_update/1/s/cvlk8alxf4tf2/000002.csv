@@ -1,0 +1,7 @@
+"0","colnames(data) <- c(""V1"", ""V2"", ""V3"")"
+"0","var1 = data$V1"
+"0","var2 = data$V2"
+"0","var3 = data$V3"
+"0","semi_r = spcor(data)"
+"0","semi_part=data.frame(var1=semi_r$estimate[3,1]^2, var2=semi_r$estimate[3,2]^2)"
+"0","print(semi_part)"

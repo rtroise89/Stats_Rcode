@@ -38,7 +38,7 @@ semi_r = spcor(data)
 # Plotting the semi-partial correlations
 barplot(semi_r$estimate, beside=TRUE, horiz=TRUE, 
         col=c("red","black","blue"),
-        xlab="Semi-Partial Person r")
+        xlab="Semi-Partial Person r", xlim=c(-1,1))
 legend("bottomleft", legend=c("X","T","Y"), fill=c("red","black","blue"))
 
 semi_part=data.frame(X=semi_r$estimate[3,1]^2, T=semi_r$estimate[3,2]^2)

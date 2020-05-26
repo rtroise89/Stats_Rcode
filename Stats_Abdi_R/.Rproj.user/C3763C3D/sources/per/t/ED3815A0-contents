@@ -1,0 +1,103 @@
+---
+title: "Chap3"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+library(dplyr)
+library(ppcor)
+library(xtable)
+```
+
+First, set working directory. 'data' is a table with three columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap3.csv", header = FALSE, skip = 1)
+colnames(data) = c("LearnTrial", "InterpolateList", "CorrectRecall")
+```
+
+View the data.
+```{r}
+knitr::kable(xtable(data))
+```
+
+Calculate the mean for all columns
+```{r}
+summarise_all(data,mean)
+```
+
+Calculate the standard deviation for all columns
+```{r}
+summarise_all(data,sd)
+```
+
+Replace 'var1', 'var2', and 'var3' to an appropriate first, second, and third column name using CTRL+F. **Only check off 'Match case' to avoid overwriting additional code.**
+```{r}
+column = colnames(data)
+colnames(data) <- c("V1", "V2", "V3")
+var1 = data$V1
+var2 = data$V2
+var3 = data$V3
+```
+
+We now perform an orthogonal multiple regression analysis on the data
+```{r}
+multi_reg1=lm(var3~var1+var2,data=data)
+```
+
+We now compute the predicted values and the residuals, then print the results on a single table. Replace 'var3', the dependent variable, to an appropriate column name using CTRL+F. **Only check off 'Match case' to avoid overwriting additional code.**
+```{r}
+Y_hat=predict(multi_reg1)
+Residual=round(residuals(multi_reg1),2)
+knitr::kable(xtable(data.frame(Y=var3,Y_hat,Residual)))
+```
+
+We now compute the sum of squares of the residuals, then print the result
+```{r}
+SS_residual=sum(Residual^2)
+print(SS_residual)
+```
+
+We now compute the correlation matrix between the variables. **User will also input desired variable names in double quotes**
+```{r}
+colnames(data) = c("LearnTrial", "InterpolateList", "CorrectRecall")
+r_mat=cor(data)
+Corr=round(r_mat,4)
+knitr::kable(xtable((Corr)))
+```
+
+We now compute the semi-partial coefficients, then print the results. Replace 'var1', 'var2', and 'var3' to an appropriate first, second, and third column name using CTRL+F. **Only check off 'Match case' to avoid overwriting additional code.**
+```{r}
+colnames(data) <- c("V1", "V2", "V3")
+var1 = data$V1
+var2 = data$V2
+var3 = data$V3
+semi_r = spcor(data)
+semi_part=data.frame(var1=semi_r$estimate[3,1]^2, var2=semi_r$estimate[3,2]^2)
+knitr::kable(xtable((semi_part)))
+```
+
+Plotting the semi-partial correlations
+```{r}
+colnames(data) = c("var1", "var2", "var3")
+semi_r = spcor(data)
+barplot(semi_r$estimate, beside=TRUE, horiz=TRUE, 
+        col=c("red","black","blue"),
+        xlab="Semi-Partial Person r", xlim=c(-1,1))
+legend("bottomleft", legend=c("var1","var2","var3"), fill=c("red","black","blue"))
+```
+
+Multi-Regression Analysis
+```{r}
+print(summary(multi_reg1))
+```
+
+ANOVA analysis
+```{r}
+print(anova(multi_reg1))
+```
+
