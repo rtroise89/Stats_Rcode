@@ -1,0 +1,2 @@
+"0","colnames(data) <- c(""V1"", ""V2"", ""V3"")"
+"0","score=c(data$V1,data$V2,data$V3)"

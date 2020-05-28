@@ -1,0 +1,65 @@
+---
+title: "Chap6_2"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, include=FALSE}
+library(xtable)
+```
+
+First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap6_2.csv", header = FALSE, skip = 1)
+colnames(data) <- c("No_Cont", "Cont_before", "Cont_after", "Part_cont")
+```
+
+We now combine the observations into one long column (score)
+```{r}
+colnames(data) <- c("V1", "V2", "V3", "V4")
+score=c(data$V1,data$V2,data$V3,data$V4)
+```
+
+We generate a second column (levels), that identifies the group for each score. **User will also input desired variable names in double quotes**
+```{r}
+levels=factor(c(rep("No_cont",5),rep("Cont_before",5),
+                rep("Cont_after",5),rep("Part_cont",5)))
+```
+
+We now use the means of the respective groups as the predictors
+```{r}
+Predictors=c(rep(mean(data$V1),5),rep(mean(data$V2),5),
+             rep(mean(data$V3),5),rep(mean(data$V4),5))
+```
+
+We now form a data frame for the Regression approach, and print the results
+```{r}
+data_reg=data.frame(Predictors,score)
+r=cor(Predictors,score)
+knitr::kable(xtable(data_reg))
+print(r)
+```
+
+Now we perform the regression analysis on the data
+```{r}
+reg1=lm(score~Predictors)
+```
+
+We now form a data frame with the dependent variable and the factors, then print the table.
+```{r}
+data=data.frame(score=score,group=levels)
+knitr::kable(xtable(data))
+```
+
+We now generate the ANOVA table and regression analysis based on the linear model
+```{r}
+aov1=aov(score~levels)
+print(model.tables(aov(score~levels),type = "means"),digits=3)
+summary(aov1)
+summary(reg1)
+```
+

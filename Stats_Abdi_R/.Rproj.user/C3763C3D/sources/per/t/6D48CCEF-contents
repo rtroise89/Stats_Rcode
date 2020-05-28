@@ -1,0 +1,90 @@
+---
+title: "Chap14"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(xtable)
+library(gmodels)
+```
+
+We collect the data for each subjects for all levels of
+Factor A and Factor B for each subject.
+
+First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap14.csv", header = FALSE, skip = 1)
+colnames(data) <- c("b1", "b2")
+```
+
+We now combine the observations into one long column (score)
+```{r}
+colnames(data) <- c("V1", "V2")
+score=c(data$V1,data$V2)
+```
+
+We now prepare the labels for the 4x5x2 scores according to
+the factor levels:
+a1 a2 a3 a4 a5, a1 a2 a3 a4 a5........etc for Factor A
+```{r}
+Face=gl(5,1,5*4*2, labels=c("a1","a2","a3","a4","a5"))
+```
+
+b1 b2, b1 b2....... etc for Factor B
+```{r}
+Typicality=gl(2,4*5*1,5*4*2,labels=c("Atypical","Typical"))
+```
+
+sub_1 sub_1......., sub_2 sub_2......,sub_3 sub_3 ....,sub_4
+sub_4 ....., sub_5 sub_5.....etc for Subjects
+```{r}
+Subject=gl(4, 5*1, 5*4*2, labels = c("sub_1", "sub_2", "sub_3",
+                                     "sub_4"))
+```
+
+We now form a data frame with the dependent variable and the factors, then we print the data
+```{r}
+data = data.frame(score = score, Face = factor(Face),
+                  Typicality = factor(Typicality))
+knitr::kable(xtable(data))
+```
+
+Anova when "Subject" is considered as a random factor
+```{r}
+aov1 = aov(score ~ (Subject + Face%in%Typicality + Typicality +
+                      Typicality:Subject))
+Df = summary(aov(score ~ (Subject + Face%in%Typicality +
+                            Typicality + Typicality:Subject)))[[1]]$Df
+Sum_Sq = summary(aov(score ~ (Subject + Face%in%Typicality +
+                                Typicality + Typicality:Subject)))[[1]]$Sum
+MS = summary(aov(score ~ (Subject + Face%in%Typicality +
+                            Typicality + Typicality:Subject)))[[1]]$Mean
+F = summary(aov(score ~ (Subject + Face%in%Typicality +
+                           Typicality + Typicality:Subject)))[[1]]$F
+F[2]=NA
+Pr = summary(aov(score ~ (Subject + Face%in%Typicality +
+                            Typicality + Typicality:Subject)))[[1]]$Pr
+Pr[2]=NA
+Source_names = c("Subject", "Typicality", "Face(Typicality)",
+                 "Subject * Typicality", "Error:Face * Subject(Typicality)")
+```
+
+We print the Anova table. The 'Typicality' factor has a Quasi F or F'. This F' has
+not been displayed in the Anova table and has to be
+calculated separately
+```{r}
+Anova_table = data.frame(Names = Source_names, Df=Df, Sum.Sq=Sum_Sq, Mean.Sq=MS,
+                        F.Value=F, "Pr>F" = Pr)
+knitr::kable(xtable(Anova_table))
+```
+
+We now print the rest of the results
+```{r}
+print(model.tables(aov1,"means"),digits=3)
+```
+

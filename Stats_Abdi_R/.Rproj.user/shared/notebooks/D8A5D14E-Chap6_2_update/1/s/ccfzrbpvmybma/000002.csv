@@ -1,0 +1,2 @@
+"0","levels=factor(c(rep(""No_cont"",5),rep(""Cont_before"",5),"
+"0","                rep(""Cont_after"",5),rep(""Part_cont"",5)))"

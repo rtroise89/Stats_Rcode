@@ -1,0 +1,61 @@
+---
+title: "Chap10_2"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(xtable)
+library(gmodels)
+```
+
+First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap10_2.csv", header = FALSE, skip = 1)
+colnames(data) <- c("I", "II", "III", "IV", "V")
+```
+
+We now combine the observations into one long column (score)
+```{r}
+colnames(data) <- c("V1", "V2", "V3", "V4", "V5")
+score=c(data$V1,data$V2,data$V3,data$V4,data$V5)
+```
+
+We now prepare the labels for the 4x5x2 scores according to the factor levels: Admin_1 Admin_2 Admin_3 Admin_4, Admin_1 Admin_2 Admin_3 Admin_4........etc for Factor A
+```{r}
+Test_Admin=gl(4,1,5*4*2, labels = c("Admin_1", "Admin_2","Admin_3", "Admin_4"))
+```
+
+I I I......., II II ......,III III ....,IV IV ....., V V.....etc for Factor B.
+```{r}
+Order=gl(5,4*2,5*4*2, labels=c("I","II","III","IV","V"))
+```
+
+We now form a data frame with the dependent variable and the factors, then we print the data
+```{r}
+data = data.frame(score = score, Factor_A = factor(Test_Admin), Factor_B=factor(Order))
+knitr::kable(xtable(data))
+```
+
+We now perform the ANOVA on the data
+```{r}
+aov1=aov(score~Test_Admin*Order, data=data)
+```
+
+Model III when both A and B are random
+```{r}
+aov2 = aov(score~Test_Admin + Order + Error(Test_Admin:Order),
+                    data = data)
+```
+
+We now print the results
+```{r}
+summary(aov1)
+print(model.tables(aov1,"means"),digits=3)
+summary(aov2)
+```
+

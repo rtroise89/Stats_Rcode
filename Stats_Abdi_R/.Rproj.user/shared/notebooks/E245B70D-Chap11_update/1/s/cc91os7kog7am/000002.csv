@@ -1,0 +1,2 @@
+"0","data <- read.csv(""chap11.csv"", header = FALSE, skip = 1)"
+"0","colnames(data) <- c(""sub_1"", ""sub_2"", ""sub_3"", ""sub_4"", ""sub_5"")"

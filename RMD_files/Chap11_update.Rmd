@@ -1,0 +1,54 @@
+---
+title: "Chap11"
+author: "Anjali Krishnan and Richard Troise"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(xtable)
+library(gmodels)
+```
+
+First, set working directory. 'data' is a table with two columns and same number of rows, and should be numeric. Columns have headers indicating the names of the variables. **User will also input desired variable names in double quotes**
+```{r}
+data <- read.csv("chap11.csv", header = FALSE, skip = 1)
+colnames(data) <- c("sub_1", "sub_2", "sub_3", "sub_4", "sub_5")
+```
+
+We now combine the observations into one long column (score)
+```{r}
+colnames(data) <- c("V1", "V2", "V3", "V4", "V5")
+score=c(data$V1,data$V2,data$V3,data$V4,data$V5)
+```
+
+We now prepare the labels for the 4x5 scores according to the
+factor levels:
+a1 a2 a3 a4, a1 a2 a3 a4........etc for Factor A
+```{r}
+Fact_A=gl(4,1,4*5*1, labels=c("a1","a2","a3","a4"))
+```
+
+sub_1 sub_1......., sub_2 sub_2......,sub_3 sub_3 ....,sub_4
+sub_4 ....., sub_5 sub_5.....etc for Subjects
+```{r}
+Subject=gl(5,4*1,5*4*1, labels=c("sub_1", "sub_2", "sub_3","sub_4", "sub_5"))
+```
+
+We now form a data frame with the dependent variable and the factors, then we print the results
+```{r}
+data=data.frame(score = score,Factor_A = factor(Fact_A),
+                Subject = factor(Subject))
+knitr::kable(xtable(data))
+```
+
+Anova when "Subject" is considered as a random factor, then we print the results
+```{r}
+aov1=aov(score~Fact_A+Error(Subject),data=data)
+summary(aov1)
+print(model.tables(aov(score~Fact_A+Subject),"means"))
+```
+

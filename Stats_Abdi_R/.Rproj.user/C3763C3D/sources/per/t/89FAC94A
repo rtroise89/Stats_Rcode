@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590608901221.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3290740364",
+    "id" : "89FAC94A",
+    "lastKnownWriteTime" : 1590611670,
+    "last_content_update" : 1590611928982,
+    "path" : "~/Statistics/Stats_Rcode/Stats_Abdi_R/Chap10_update.Rmd",
+    "project_path" : "Chap10_update.Rmd",
+    "properties" : {
+        "cursorPosition" : "15,0",
+        "last_setup_crc32" : "",
+        "scrollLine" : "9",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 27,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

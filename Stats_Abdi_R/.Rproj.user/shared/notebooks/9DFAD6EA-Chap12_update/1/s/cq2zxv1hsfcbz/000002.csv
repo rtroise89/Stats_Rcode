@@ -1,0 +1,2 @@
+"0","aov1 = aov(score ~ (Learning * Testing) + Error(Subject /"
+"0","                                                  (Learning * Testing)), data = data)"

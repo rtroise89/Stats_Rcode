@@ -52,8 +52,8 @@ C_4=c(1,-1,0,0)
 
 # NOTE: The source for R script "multcomp" has to be specified.
 means=tapply(score,levels,mean)
-source("?/R_scripts/08_Planned_Non_Ortho_Cont/
-       multcomp.R")
+#source("?/R_scripts/08_Planned_Non_Ortho_Cont/
+#       multcomp.R")
 multi_comp=multcomp(as.vector(means),5,16,2.350,conf.level=
                      .05,type= "Sidak",decreasing=TRUE)
 

@@ -1,0 +1,2 @@
+"0","Predictors=c(rep(mean(No_cont),5),rep(mean(Cont_before),5),"
+"0","             rep(mean(Cont_after),5),rep(mean(Part_cont),5))"
